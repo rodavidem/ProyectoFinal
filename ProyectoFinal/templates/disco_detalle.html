@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>{{ disco.titulo }}</h1>
+<p><strong>Intérprete:</strong> {{ disco.interprete }}</p>
+<p><strong>Género:</strong> {{ disco.genero }}</p>
+{% if disco.año_lanzamiento %}
+<p><strong>Año de Lanzamiento:</strong> {{ disco.año_lanzamiento }}</p>
+{% endif %}
+{% if disco.descripcion %}
+<p><strong>Descripción:</strong> {{ disco.descripcion }}</p>
+{% endif %}
+{% if disco.imagen %}
+    <img src="{{ disco.imagen.url }}" alt="{{ disco.titulo }}" style="max-width: 300px;">
+{% endif %}
+{% endblock %}

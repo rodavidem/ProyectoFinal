@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Lista de Discos</h1>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Intérprete</th>
+            <th>Título</th>
+            <th>Género</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for disco in discos %}
+        <tr>
+            <td>{{ disco.interprete }}</td>
+            <td>{{ disco.titulo }}</td>
+            <td>{{ disco.genero }}</td>
+            <td>
+                <a href="{% url 'disco_detalle' disco.pk %}" class="btn btn-info">Ver Detalle</a>
+                <!-- Botón "Agregar al carrito" visible para todos -->
+                <button class="btn btn-primary" onclick="agregarAlCarrito()">
+                    Agregar al carrito
+                </button>
+
+                {% if user.is_authenticated and user.is_superuser %}
+                <!-- Botón "Editar" visible solo para administradores -->
+                <a href="{% url 'editar_disco' disco.id %}" class="btn btn-warning">Editar</a>
+                
+                <!-- Botón "Borrar" visible solo para administradores -->
+                <form action="{% url 'borrar_disco' disco.id %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<script>
+function agregarAlCarrito() {
+    alert("El disco fue agregado al carrito correctamente.");
+}
+</script>
+
+{% endblock %}

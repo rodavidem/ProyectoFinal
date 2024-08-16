@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Vista de Administrador</h1>
+<p style="color: crimson;">Esta sección es solo para administradores.</p>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="POST" enctype="multipart/form-data"> 
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Cargar Disco</button>
+</form>
+
+{% endblock %}

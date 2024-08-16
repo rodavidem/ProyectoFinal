@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    {% for cliente in clientes %}
+        <p style="color: brown;">El cliente es: {{cliente.nombre}}</p>
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h2>Buscar Vinilo</h2>
+    <form method="GET">
+        <input type="text" name="nombre" placeholder="Buscar por artista o título" value="{{ nombre }}">
+        <input type="submit" value="Buscar">
+    </form>
+
+    {% if nombre %}
+        <h2>Resultados de la búsqueda</h2>
+        <p>Resultados para: "{{ nombre }}"</p>
+        {% if resultados %}
+            <ul>
+                {% for disco in resultados %}
+                    <li>
+                        <strong>Intérprete:</strong> {{ disco.interprete }}<br>
+                        <strong>Título:</strong> {{ disco.titulo }}<br>
+                        <strong>Género:</strong> {{ disco.genero }}<br>
+                        {% if disco.año_lanzamiento %}
+                        <strong>Año de Lanzamiento:</strong> {{ disco.año_lanzamiento }}<br>
+                        {% endif %}
+                        {% if disco.descripcion %}
+                        <strong>Descripción:</strong> {{ disco.descripcion }}<br>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No se encontraron resultados.</p>
+        {% endif %}
+    {% else %}
+        <p>No se ingresó un nombre para buscar.</p>
+    {% endif %}
+{% endblock content %}

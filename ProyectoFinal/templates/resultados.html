@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h2>Resultados de la búsqueda</h2>
+
+    {% if nombre %}
+        <p>Resultados para: {{ nombre }}</p>
+        {% if resultados %}
+            <ul>
+                {% for cliente in resultados %}
+                    <li>
+                        <strong>Nombre:</strong> {{ cliente.nombre }} {{ cliente.apellido }}<br>
+                        <strong>Email:</strong> {{ cliente.email }}<br>
+                        <strong>Teléfono:</strong> {{ cliente.telefono }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No se encontraron resultados.</p>
+        {% endif %}
+    {% else %}
+        <p>No se ingresó un nombre para buscar.</p>
+    {% endif %}
+{% endblock content %}

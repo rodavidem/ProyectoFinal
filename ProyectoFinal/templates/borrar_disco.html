@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Borrar Disco</h1>
+
+<p>¿Estás seguro que deseas eliminar el disco "{{ disco.titulo }}"?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Borrar</button>
+    <a href="{% url 'lista' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+
+{% endblock %}
